@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        // Adapte le chemin si ta collection Bruno n'est pas à la racine du repo
-        COLLECTION_DIR = '/test collection'
-    }
-
     stages {
         stage('Lancer les tests Bruno') {
             agent {
@@ -17,9 +12,9 @@ pipeline {
                 }
             }
             steps {
-                dir("${COLLECTION_DIR}") {
+                
                     sh 'bru run --env-file environments/prepro.yml --reporter-json bruno-output.json'
-                }
+                
             }
         }
 
@@ -31,9 +26,9 @@ pipeline {
                 }
             }
             steps {
-                dir("${COLLECTION_DIR}") {
+                
                     sh 'node bruno-to-allure.js bruno-output.json allure-results'
-                }
+                
             }
         }
     }
@@ -43,7 +38,7 @@ pipeline {
             // Nécessite le plugin Jenkins "Allure" installé (Manage Jenkins > Plugins)
             allure includeProperties: false,
                    jdk: '',
-                   results: [[path: "${COLLECTION_DIR}/allure-results"]]
+                   results: [[path: "allure-results"]]
         }
         failure {
             echo 'Les tests Bruno ont échoué — voir le rapport Allure pour le détail.'
