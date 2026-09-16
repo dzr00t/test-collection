@@ -3,31 +3,36 @@ pipeline {
 
     environment {
         // Adapte le chemin si ta collection Bruno n'est pas à la racine du repo
-        COLLECTION_DIR = 'collections/test collection'
+        COLLECTION_DIR = '/test collection'
     }
 
     stages {
-        stage('Installer les dépendances') {
-            steps {
-                dir("${COLLECTION_DIR}") {
-                    sh 'npm install'
-                    
+        stage('Lancer les tests Bruno') {
+            agent {
+                docker {
+                    image 'usebruno/cli:latest'
+                    // L'image a un entrypoint "bru" par défaut : on le désactive pour exécuter sh
+                    args '--entrypoint= --shm-size=2gb'
+                    reuseNode true
                 }
             }
-        }
-
-        stage('Lancer les tests Bruno') {
             steps {
                 dir("${COLLECTION_DIR}") {
-                    sh 'npm run test:bruno'
+                    sh 'bru run --env-file environments/prepro.yml --reporter-json bruno-output.json'
                 }
             }
         }
 
         stage('Convertir en résultats Allure') {
+            agent {
+                docker {
+                    image 'node:20'
+                    reuseNode true
+                }
+            }
             steps {
                 dir("${COLLECTION_DIR}") {
-                    sh 'npm run convert:allure'
+                    sh 'node bruno-to-allure.js bruno-output.json allure-results'
                 }
             }
         }
