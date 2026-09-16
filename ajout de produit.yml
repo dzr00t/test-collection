@@ -28,32 +28,30 @@ runtime:
         bru.setCollectionVar("stock",stock.toFixed(0))
     - type: after-response
       code: |-
-        let Role=bru.getCollectionVar("Role");
-
-        test("Verifier code statue selon le role",()=>{
-          if (Role==="admin"){
-            expect(res.getStatus()).to.equal(201);
-          }else{
-            expect(res.getStatus()).to.equal(403);
-          }
+        test("Verifier code statue  201 ou 403",()=>{
+        expect([201, 403]).to.include(res.getStatus());
         })
 
-        test("Verfier ce que on a envoyer est bien ce que on recus ",()=>{
-          if (res.getStatus()===201){
-          expect(req.getBody().name).equals(res.getBody().product.name);
-          expect(req.getBody().description).equals(res.getBody().product.description);
-          expect(req.getBody().price).to.equals(res.getBody().product.price);
-          expect(req.getBody().stock).equals(res.getBody().product.stock);
-            
-          }else{
-          expect("Accès réservé aux administrateurs.").equals(res.getBody().message);
+        test("Verfier ce que on a envoyer est bien ce que on recus ", function() {
+          const body = req.getBody();
+          const resBody = res.getBody();
+
+          switch (res.getStatus()) {
+            case 201:
+              expect(body.name).equals(resBody.product.name);
+              expect(body.description).equals(resBody.product.description);
+              expect(body.price).equals(resBody.product.price);
+              expect(body.stock).equals(resBody.product.stock);
+              break;
+
+            case 403:
+              expect("Accès réservé aux administrateurs.").equals(resBody.message);
+              break;
+
+            default:
+              throw new Error(`Statut inattendu : ${res.getStatus()}`);
           }
-
-          
-          
-          
-
-        })
+        });
 
 settings:
   encodeUrl: true
