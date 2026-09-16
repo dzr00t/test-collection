@@ -3,7 +3,8 @@
 
 # Dependencies
 node_modules
-
+allure-report
+allure-results
 # OS files
 .DS_Store
 Thumbs.db

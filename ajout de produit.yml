@@ -39,7 +39,7 @@ runtime:
         })
 
         test("Verfier ce que on a envoyer est bien ce que on recus ",()=>{
-          if (Role==="admin"){
+          if (res.getStatus()===201){
           expect(req.getBody().name).equals(res.getBody().product.name);
           expect(req.getBody().description).equals(res.getBody().product.description);
           expect(req.getBody().price).to.equals(res.getBody().product.price);

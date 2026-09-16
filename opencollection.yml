@@ -20,21 +20,21 @@ request:
     token: "{{Token}}"
   variables:
     - name: Role
-      value: user
+      value: admin
     - name: id_user
       value:
         type: number
-        data: "1908"
+        data: "1967"
     - name: Email
-      value: Marilie_Beahan45@yahoo.com
+      value: Sammy.Kulas@hotmail.com
     - name: Password
-      value: mi1gzGjHoG3prxL
+      value: Dxo865akKNjsO4J
     - name: Token
-      value: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1c2VyLWFwaSIsInN1YiI6MTkwOCwicm9sZSI6InVzZXIiLCJpYXQiOjE3ODk1NTI0MzgsImV4cCI6MTc4OTU1NjAzOCwianRpIjoiZDJkMzg0NDVlOTUxMDk5Y2VkYzkyNTgzZGMwMDdjNTQifQ.OHjdrZO8rUbUDz52DjTUbVp8AR6NzR4j2ySD6V4tYN4
+      value: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1c2VyLWFwaSIsInN1YiI6MTk2Nywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg5NTYwMDc5LCJleHAiOjE3ODk1NjM2NzksImp0aSI6ImE5MWExNzAzNzM1Nzg5ZDc1NjRiYzAxYzU3ODYyNzZjIn0.eboIWpvX63fzKXCP8e2wSP8zGkBgJ2IYhVxa9564oHc
     - name: prix
-      value: "71.56"
+      value: "55.13"
     - name: stock
-      value: "34"
+      value: "36"
 bundled: false
 extensions:
   bruno:
