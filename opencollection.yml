@@ -24,17 +24,17 @@ request:
     - name: id_user
       value:
         type: number
-        data: "1967"
+        data: "2038"
     - name: Email
-      value: Sammy.Kulas@hotmail.com
+      value: Dustin.Pfannerstill52@hotmail.com
     - name: Password
-      value: Dxo865akKNjsO4J
+      value: 4KiGKSwo_AVJVYK
     - name: Token
-      value: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1c2VyLWFwaSIsInN1YiI6MTk2Nywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg5NTYwMDc5LCJleHAiOjE3ODk1NjM2NzksImp0aSI6ImE5MWExNzAzNzM1Nzg5ZDc1NjRiYzAxYzU3ODYyNzZjIn0.eboIWpvX63fzKXCP8e2wSP8zGkBgJ2IYhVxa9564oHc
+      value: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1c2VyLWFwaSIsInN1YiI6MjAzOCwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg5NTY0MTUwLCJleHAiOjE3ODk1Njc3NTAsImp0aSI6ImJlMDc3ODlhN2UyMjIzZmVjOWUzZDkxZWVjN2QzYTkyIn0.wV7hAuYaTP1jmfjUyaxEzMvw9Svi69rUnQfidy61kYo
     - name: prix
-      value: "55.13"
+      value: "36.72"
     - name: stock
-      value: "36"
+      value: "52"
 bundled: false
 extensions:
   bruno:
