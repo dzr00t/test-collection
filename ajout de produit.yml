@@ -1,0 +1,63 @@
+info:
+  name: ajout de produit
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{URL1}}public/products"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "{{$randomProduct}}",
+        "description": "{{$randomDatabaseEngine}}",
+        "price": {{prix}},
+        "stock": {{stock}},
+        "image_url": "https://..."
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        let stock=(Math.random()*41)+20
+        let prix=(Math.random()*87.50)+20.50
+        bru.setCollectionVar("prix",prix.toFixed(2))
+        bru.setCollectionVar("stock",stock.toFixed(0))
+    - type: after-response
+      code: |-
+        let Role=bru.getCollectionVar("Role");
+
+        test("Verifier code statue selon le role",()=>{
+          if (Role==="admin"){
+            expect(res.getStatus()).to.equal(201);
+          }else{
+            expect(res.getStatus()).to.equal(403);
+          }
+        })
+
+        test("Verfier ce que on a envoyer est bien ce que on recus ",()=>{
+          if (Role==="admin"){
+          expect(req.getBody().name).equals(res.getBody().product.name);
+          expect(req.getBody().description).equals(res.getBody().product.description);
+          expect(req.getBody().price).to.equals(res.getBody().product.price);
+          expect(req.getBody().stock).equals(res.getBody().product.stock);
+            
+          }else{
+          expect("Accès réservé aux administrateurs.").equals(res.getBody().message);
+          }
+
+          
+          
+          
+
+        })
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

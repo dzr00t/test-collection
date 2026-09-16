@@ -1,0 +1,4 @@
+name: prepro
+variables:
+  - name: URL1
+    value: https://api.efi-academy.com/user-api/

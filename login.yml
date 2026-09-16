@@ -1,0 +1,35 @@
+info:
+  name: login
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{URL1}}public/login"
+  body:
+    type: json
+    data: |-
+      {
+        "email": "{{Email}}",
+        "password": "{{Password}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Verifier code statue 200",()=>{
+          expect(res.getStatus()).to.equal(200);
+        })
+
+        test("Stocker le token",()=>{
+          bru.setCollectionVar("Token", res.getBody().token)
+        })
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

@@ -1,0 +1,62 @@
+info:
+  name: creation de compte
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{URL1}}public/register"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "{{$randomNamePrefix}}",
+        "email": "{{$randomEmail}}",
+        "password": "{{$randomPassword}}",
+        "role": "{{Role}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        let random = Math.floor(Math.random()*101);
+        let role;
+        if(random>60){
+         role= "admin"
+        }
+        else{
+         role= "user"
+        }
+        bru.setCollectionVar("Role",role)
+    - type: after-response
+      code: |-
+        test("Verifier code statue 201",()=>{
+          expect(res.getStatus()).to.equal(201);
+        })
+
+        test("Verfier ce que on a envoyer est bien ce que on recus ",()=>{
+          
+          expect(req.getBody().name).equals(res.getBody().user.name);
+          expect(req.getBody().email).equals(res.getBody().user.email);
+          expect(req.getBody().role).equals(res.getBody().user.role);
+          expect(res.getBody().user).to.have.property('id');
+          
+          let id_user
+          bru.setCollectionVar("id_user", res.getBody().user.id);
+          bru.setCollectionVar("Email", req.getBody().email);
+          bru.setCollectionVar("Password", req.getBody().password);
+          
+          
+          
+          
+
+        })
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

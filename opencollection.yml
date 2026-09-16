@@ -1,0 +1,43 @@
+opencollection: 1.0.0
+
+info:
+  name: test collection
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+request:
+  auth:
+    type: bearer
+    token: "{{Token}}"
+  variables:
+    - name: Role
+      value: user
+    - name: id_user
+      value:
+        type: number
+        data: "1908"
+    - name: Email
+      value: Marilie_Beahan45@yahoo.com
+    - name: Password
+      value: mi1gzGjHoG3prxL
+    - name: Token
+      value: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1c2VyLWFwaSIsInN1YiI6MTkwOCwicm9sZSI6InVzZXIiLCJpYXQiOjE3ODk1NTI0MzgsImV4cCI6MTc4OTU1NjAzOCwianRpIjoiZDJkMzg0NDVlOTUxMDk5Y2VkYzkyNTgzZGMwMDdjNTQifQ.OHjdrZO8rUbUDz52DjTUbVp8AR6NzR4j2ySD6V4tYN4
+    - name: prix
+      value: "71.56"
+    - name: stock
+      value: "34"
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git
